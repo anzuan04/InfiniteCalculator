@@ -1,10 +1,10 @@
 infiniteNumberNode.c
-
-    typedef struct __NumberNode // (number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]<-(prev|NN)|(next|NN)->(number|int)[DOT]<-(pr|NNev)|(ne|NNxt)->(number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]
-    ty|NNpedef s|NNtruct __NumberList // (head|NN)[3], (dot|NN)[DOT], (tail|NN)[2], (sig|int)[1], (op|int)[0]
+                                    // (member|struct)
+    typedef struct __NumberNode     // (number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]<-(prev|NN)|(next|NN)->(number|int)[DOT]
+    typedef struct __NumberList     // (head|NN)[3], (dot|NN)[DOT], (tail|NN)[2], (sig|int)[1], (op|int)[0]
     typedef struct __NumberListNode // (value|NL)[32.32]<-(prev|NLN)|(next|NLN)->(value|NL)[11.41]
-    typedef struct __calQueue
-    typedef struct __calStack
+    typedef struct __calQueue       // [ (qHead|NLN)[32.32] | [11.41] | [+] | (qTail|NLN)[-] ]
+    typedef struct __calStack       // [ [-] | (sTop|NLN)[+] ]
 
 
         NumberListNode* add(NumberListNode* val1, NumberListNode* val2);
