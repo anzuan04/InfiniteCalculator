@@ -1,10 +1,32 @@
-infiniteNumberNode.c
-                                    // (member|struct)
-    typedef struct __NumberNode     // (number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]<-(prev|NN)|(next|NN)->(number|int)[DOT]
-    typedef struct __NumberList     // (head|NN)[3], (dot|NN)[DOT], (tail|NN)[2], (sig|int)[1], (op|int)[0]
-    typedef struct __NumberListNode // (value|NL)[32.32]<-(prev|NLN)|(next|NLN)->(value|NL)[11.41]
-    typedef struct __calQueue       // [ (qHead|NLN)[32.32] | [11.41] | [+] | (qTail|NLN)[-] ]
-    typedef struct __calStack       // [ [-] | (sTop|NLN)[+] ]
+# CODE_DESCRIPTION
+
+
+---
+
+
+## InfiniteNumberNode.c
+
+
+
+
+    * **typedef struct __NumberNode** > (member|struct)    
+        * (number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]<-(prev|NN)|(next|NN)->(number|int)[DOT] ...
+
+
+    * **typedef struct __NumberList** > (member|struct)
+        * (head|NN)[3], (dot|NN)[DOT], (tail|NN)[2], (sig|int)[1], (op|int)[0]
+
+
+    * **typedef struct __NumberListNode** > (member|struct)
+        * (value|NL)[32.32]<-(prev|NLN)|(next|NLN)->(value|NL)[11.41]
+
+
+    * **typedef struct __calQueue** > (member|struct)      
+        * [ (qHead|NLN)[32.32] | [11.41] | [+] | (qTail|NLN)[-] ]
+
+
+    * **typedef struct __calStack** > (member|struct)      
+        * [ [-] | (sTop|NLN)[+] ]
 
 
         NumberListNode* add(NumberListNode* val1, NumberListNode* val2);
