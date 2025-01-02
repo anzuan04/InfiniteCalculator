@@ -21,7 +21,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 * **typedef struct __NumberList**
    
 | member(struct) | val |
-| :-: | :-: | :-: |
+| :-: | :-: |
 | head(NN) | 3 |
 | tail(NN) | 2 |
 | dot(int) | DOT |
