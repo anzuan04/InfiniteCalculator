@@ -8,25 +8,56 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 ### DataStructure
 
-* **typedef struct __NumberNode**    
-    * (number|int)[3]<-(prev|NN)|(next|NN)->(number|int)[2]<-(prev|NN)|(next|NN)->(number|int)[DOT] ...
-    > (member|struct)
+* **typedef struct __NumberNode**
+
+| member(struct) | val | val | val | val | val |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| next(NN) | 5 | DOT | 1 | 2 | NULL |
+| prev(NN) | NULL | 3 | 5 | DOT | 1 |
+| number(int) | 3 | 5 | DOT | 1 | 2 |
+
+> ex : 35.12
 
 * **typedef struct __NumberList**
-    * (head|NN)[3], (dot|NN)[DOT], (tail|NN)[2], (sig|int)[1], (op|int)[0]
-    > (member|struct)
+   
+| member(struct) | val |
+| :-: | :-: | :-: |
+| head(NN) | 3 |
+| tail(NN) | 2 |
+| dot(int) | DOT |
+| op(int) | 0 |
+| sig(int) | 1 |
+
+> op ? operation : not operation
+> sig ? + : -
+> ex : 35.12
 
 * **typedef struct __NumberListNode**
-    * (value|NL)[32.32]<-(prev|NLN)|(next|NLN)->(value|NL)[11.41]
-    > (member|struct)
 
-* **typedef struct __calQueue**      
-    * [ (qHead|NLN)[32.32] | [11.41] | [+] | (qTail|NLN)[-] ]
-    > (member|struct)
+| member(struct) | val | val | val |
+| :-: | :-: | :-: | :-: |
+| next(NLN) | 31.63 | ADD | NULL | 
+| prev(NLN) | NULL | 35.12 | 31.63 |
+| value(NL) | 35.12 | 31.63 | ADD |
 
-* **typedef struct __calStack**      
-    * [ [-] | (sTop|NLN)[+] ]
-    > (member|struct)
+> ex : 35.12 + 31.63 in queue by conversing infix to postfix
+
+* **typedef struct __calQueue**
+
+| member(struct) | val |
+| :-: | :-: |
+| qHead(NLN) | 35.12 |
+| qTail(NLN) | ADD |
+
+> ex : 35.12 + 31.63 in queue by conversing infix to postfix
+
+* **typedef struct __calStack**  
+
+| member(struct) | val |
+| :-: | :-: |
+| sTop(NLN) | ADD |
+
+> ex : 35.12 + 31.63 in stack by conversing infix to postfix
 
 ### Operation Method
 
