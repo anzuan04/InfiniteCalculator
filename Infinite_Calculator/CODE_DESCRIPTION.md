@@ -4,8 +4,6 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 ## InfiniteNumberNode.c
 
----
-
 ### DataStructure
 
 * **typedef struct __NumberNode**
@@ -36,11 +34,11 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 | member(struct) | val | val | val |
 | :-: | :-: | :-: | :-: |
-| next(NLN) | 31.63 | ADD | NULL | 
-| prev(NLN) | NULL | 35.12 | 31.63 |
-| value(NL) | 35.12 | 31.63 | ADD |
+| next(NLN) | 38.63 | ADD | NULL | 
+| prev(NLN) | NULL | 35.12 | 38.63 |
+| value(NL) | 35.12 | 38.63 | ADD |
 
-> ex : 35.12 + 31.63 in queue by conversing infix to postfix
+> ex : 35.12 + 38.63 in queue by conversing infix to postfix
 
 * **typedef struct __calQueue**
 
@@ -49,7 +47,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 | qHead(NLN) | 35.12 |
 | qTail(NLN) | ADD |
 
-> ex : 35.12 + 31.63 in queue by conversing infix to postfix
+> ex : 35.12 + 38.63 in queue by conversing infix to postfix
 
 * **typedef struct __calStack**  
 
@@ -57,14 +55,44 @@ The summarized description about InfiniteNumberNode.c and main.c
 | :-: | :-: |
 | sTop(NLN) | ADD |
 
-> ex : 35.12 + 31.63 in stack by conversing infix to postfix
+> ex : 35.12 + 38.63 in stack by conversing infix to postfix
+
+---
 
 ### Operation Method
 
-NumberListNode* add(NumberListNode* val1, NumberListNode* val2);
-NumberListNode* subtract(NumberListNode* val1, NumberListNode* val2);
-NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);
-NumberListNode* divide(NumberListNode* val1, NumberListNode* val2);
+* **NumberListNode* add(NumberListNode* val1, NumberListNode* val2);**
+    * **Definition To Setup**
+
+             ic1     fc2
+              |       |
+              v       v  
+        +---+---+---+---+---+
+        | 3 | 5 | . | 1 | 2 |   **NLN val1**
+        +---+---+---+---+---+
+
+             ic1     fc2 
+              |       |
+              v       v  
+        +---+---+---+---+---+
+        | 3 | 8 | . | 6 | 3 |   **NLN val2**
+        +---+---+---+---+---+
+
+        +---+
+        |   |                   **NLN ret**
+        +---+
+    
+    > ex : 35.12 + 38.63
+
+    * **Addition Process for Simple Sum**
+
+    * **division Process for carry Sum**
+
+* **NumberListNode* subtract(NumberListNode* val1, NumberListNode* val2);**
+
+* **NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);**
+
+* **NumberListNode* divide(NumberListNode* val1, NumberListNode* val2);**
 
 ### DataStructure Method
 
