@@ -61,26 +61,26 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 ### Operation Method
 
-* **NumberListNode* add(NumberListNode* val1, NumberListNode* val2);**
+* **NumberListNode\* add(NumberListNode\* val1, NumberListNode\* val2);**
     * **Definition To Setup**
 
-             ic1     fc2
-              |       |
-              v       v  
-        +---+---+---+---+---+
-        | 3 | 5 | . | 1 | 2 |   **NLN val1**
-        +---+---+---+---+---+
+                 ic1     fc2
+                  |       |
+                  v       v  
+            +---+---+---+---+---+
+            | 3 | 5 | . | 1 | 2 |   **NLN val1**
+            +---+---+---+---+---+
 
-             ic1     fc2 
-              |       |
-              v       v  
-        +---+---+---+---+---+
-        | 3 | 8 | . | 6 | 3 |   **NLN val2**
-        +---+---+---+---+---+
+                 ic1     fc2 
+                  |       |
+                  v       v  
+            +---+---+---+---+---+
+            | 3 | 8 | . | 6 | 3 |   **NLN val2**
+            +---+---+---+---+---+
 
-        +---+
-        |   |                   **NLN ret**
-        +---+
+            +---+
+            |   |                   **NLN ret**
+            +---+
     
     > ex : 35.12 + 38.63
 
