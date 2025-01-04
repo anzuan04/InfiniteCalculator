@@ -82,7 +82,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             |   |                       **NLN ret**
             +---+
     
-    > ex : 35.12 + 38.995
+        > ex : 35.12 + 38.995
 
     2. **Addition Process for Simple Sum**
 
