@@ -34,11 +34,11 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 | member(struct) | val | val | val |
 | :-: | :-: | :-: | :-: |
-| next(NLN) | 38.63 | ADD | NULL | 
-| prev(NLN) | NULL | 35.12 | 38.63 |
-| value(NL) | 35.12 | 38.63 | ADD |
+| next(NLN) | 38.995 | ADD | NULL | 
+| prev(NLN) | NULL | 35.12 | 38.995 |
+| value(NL) | 35.12 | 38.995 | ADD |
 
-> ex : 35.12 + 38.63 in queue by conversing infix to postfix
+> ex : 35.12 + 38.995 in queue by conversing infix to postfix
 
 * **typedef struct __calQueue**
 
@@ -47,7 +47,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 | qHead(NLN) | 35.12 |
 | qTail(NLN) | ADD |
 
-> ex : 35.12 + 38.63 in queue by conversing infix to postfix
+> ex : 35.12 + 38.995 in queue by conversing infix to postfix
 
 * **typedef struct __calStack**  
 
@@ -55,38 +55,196 @@ The summarized description about InfiniteNumberNode.c and main.c
 | :-: | :-: |
 | sTop(NLN) | ADD |
 
-> ex : 35.12 + 38.63 in stack by conversing infix to postfix
+> ex : 35.12 + 38.995 in stack by conversing infix to postfix
 
 ---
 
 ### Operation Method
 
 * **NumberListNode\* add(NumberListNode\* val1, NumberListNode\* val2);**
-    * **Definition To Setup**
+    1. **Definition To Setup**
 
-                 ic1     fc2
+                 ic1     fc1            **NN pointer**
                   |       |
                   v       v  
             +---+---+---+---+---+
-            | 3 | 5 | . | 1 | 2 |   **NLN val1**
+            | 3 | 5 | . | 1 | 2 |       **NLN val1**
             +---+---+---+---+---+
 
-                 ic1     fc2 
+                 ic2     fc2            **NN pointer**
                   |       |
                   v       v  
-            +---+---+---+---+---+
-            | 3 | 8 | . | 6 | 3 |   **NLN val2**
-            +---+---+---+---+---+
+            +---+---+---+---+---+---+
+            | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+            +---+---+---+---+---+---+
 
             +---+
-            |   |                   **NLN ret**
+            |   |                       **NLN ret**
             +---+
     
-    > ex : 35.12 + 38.63
+    > ex : 35.12 + 38.995
 
-    * **Addition Process for Simple Sum**
+    2. **Addition Process for Simple Sum**
 
-    * **division Process for carry Sum**
+    * ***float Addition process***
+
+        1. *add fc1 + fc2 then store result to tail of ret*
+
+                     ic1     fc1            **NN pointer**
+                      |       |
+                      v       v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2     fc2            **NN pointer**
+                      |       |
+                      v       v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +----+
+                | 10 |                      **NLN ret**
+                +----+
+
+                int carry = 0
+            
+            > But if fc1->next == NULL or fc2->next == NULL, the number indicated by the pointer is not added
+
+        2. *move fc1 and fc2 to next then repeat 1.*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2         fc2        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +----+----+
+                | 10 | 11 |                 **NLN ret**
+                +----+----+
+
+            > But if fc1->next==NULL|fc2->next==NULL, the pointer does not move
+        
+        3. *again 1.~2.*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +----+----+---+
+                | 10 | 11 | 5 |             **NLN ret**
+                +----+----+---+
+
+        4. process carry of ret
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+
+                | 1 | 1 | 5 |               **NLN ret**
+                +---+---+---+
+
+                int carry = 1
+
+            > Concatenate each ret->number, and handle the carry if the result is greater than or equal to 10.
+        
+        5. add DOT to ret
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+
+                | . | 1 | 1 | 5 |           **NLN ret**
+                +---+---+---+---+
+
+                int carry = 1
+
+    * ***int Addition process***
+    
+        1. *calculate (ic1 + ic2 + carry)%10 then store result to head of ret*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+---+
+                | 4 | . | 1 | 1 | 5 |       **NLN ret**
+                +---+---+---+---+---+
+
+                int carry = 1
+            
+            > int carry = (ic1 + ic2 + carry)/10
+
+        2. *move ic1 and ic2 to prev then repeat 1.*
+
+                 ic1         fc1            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+
+                | 3 | 5 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                 ic2         fc2            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+---+---+
+                | 7 | 4 | . | 1 | 1 | 5 |   **NLN ret**
+                +---+---+---+---+---+---+
 
 * **NumberListNode* subtract(NumberListNode* val1, NumberListNode* val2);**
 
