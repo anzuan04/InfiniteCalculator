@@ -91,6 +91,7 @@ void NumberList_push_dot(NumberList* nl) {
     nl->dot = temp;
     nl->tail = temp;
 }
+
 void queue_push(queue* que, NumberListNode* nowNode) {
     if (que->qHead == NULL) {
         que->qHead = nowNode;

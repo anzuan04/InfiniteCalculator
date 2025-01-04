@@ -81,7 +81,9 @@ The summarized description about InfiniteNumberNode.c and main.c
             +---+
             |   |                       **NLN ret**
             +---+
-    
+
+            int carry = 0
+
         > ex : 35.12 + 38.995
 
     2. **Addition Process for Simple Sum**
@@ -108,8 +110,6 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 10 |                      **NLN ret**
                 +----+
 
-                int carry = 0
-            
             > But if fc1->next == NULL or fc2->next == NULL, the number indicated by the pointer is not added
 
         2. *move fc1 and fc2 to next then repeat 1.*
@@ -154,7 +154,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 10 | 11 | 5 |             **NLN ret**
                 +----+----+---+
 
-        4. process carry of ret
+        4. process the carry in ret
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -176,7 +176,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
                 int carry = 1
 
-            > Concatenate each ret->number, and handle the carry if the result is greater than or equal to 10.
+            > Iterate each ret->number, and handle the carry if the result is greater than or equal to 10.
         
         5. add DOT to ret
 
@@ -246,7 +246,211 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 7 | 4 | . | 1 | 1 | 5 |   **NLN ret**
                 +---+---+---+---+---+---+
 
-* **NumberListNode* subtract(NumberListNode* val1, NumberListNode* val2);**
+* **NumberListNode\* subtract(NumberListNode\* val1, NumberListNode\* val2);**
+    
+    1. **Definition To Setup**
+
+                 ic1     fc1            **NN pointer**
+                  |       |
+                  v       v  
+            +---+---+---+---+---+
+            | 3 | 9 | . | 1 | 2 |       **NLN val1**
+            +---+---+---+---+---+
+
+                 ic2     fc2            **NN pointer**
+                  |       |
+                  v       v  
+            +---+---+---+---+---+---+
+            | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+            +---+---+---+---+---+---+
+
+            +---+
+            |   |                       **NLN ret**
+            +---+
+
+            int carry = 0
+
+        > ex : 39.12 + 38.995
+
+    2. **Subtraction Process for Simple Sum**
+
+    * ***float subtraction process***
+
+        1. *subtract 10 + fc1 - fc2 then store result to tail of ret*
+
+                     ic1     fc1            **NN pointer**
+                      |       |
+                      v       v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2     fc2            **NN pointer**
+                      |       |
+                      v       v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+
+                | 2 |                       **NLN ret**
+                +---+
+            
+            > But if fc1->next == NULL or fc2->next == NULL, the number indicated by the pointer is not calculated
+
+        2. *move fc1 and fc2 to next then repeat 1.*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2         fc2        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+
+                | 2 | 3 |                   **NLN ret**
+                +---+---+
+
+            > But if fc1->next==NULL|fc2->next==NULL, the pointer does not move
+        
+        3. *again 1.~2.*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+
+                | 2 | 3 | 5 |               **NLN ret**
+                +---+---+---+
+
+        4. process the borrowing in ret
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+
+                | 1 | 2 | 5 |               **NLN ret**
+                +---+---+---+
+
+                int borrow = 1
+
+            > Iterate each ret->number, and handle the borrowing if the result is greater than or equal to 10.
+        
+        5. add DOT to ret
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+
+                | . | 1 | 1 | 5 |           **NLN ret**
+                +---+---+---+---+
+
+                int borrow = 1
+
+    * ***int subtraction process***
+    
+        1. *calculate (10 + ic1 - ic2 - borrow) then store result to head of ret*
+
+                     ic1         fc1        **NN pointer**
+                      |           |
+                      v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                     ic2             fc2    **NN pointer**
+                      |               |
+                      v               v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+---+
+                | 0 | . | 1 | 1 | 5 |       **NLN ret**
+                +---+---+---+---+---+
+
+                int borrow = 0
+            
+            > int borrow = !((10 + ic1 - ic2 - borrow) % 10)
+
+        2. *move ic1 and ic2 to prev then repeat 1.*
+
+                 ic1         fc1            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                 ic2         fc2            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+---+---+
+                | 0 | 0 | . | 1 | 1 | 5 |   **NLN ret**
+                +---+---+---+---+---+---+
+        
+        3. *delete unnecessary zero*
+        
+                 ic1         fc1            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+
+                | 3 | 9 | . | 1 | 2 |       **NLN val1**
+                +---+---+---+---+---+
+
+                 ic2         fc2            **NN pointer**
+                  |           |
+                  v           v  
+                +---+---+---+---+---+---+
+                | 3 | 8 | . | 9 | 9 | 5 |   **NLN val2**
+                +---+---+---+---+---+---+
+
+                +---+---+---+---+---+
+                | 0 | . | 1 | 1 | 5 |       **NLN ret**
+                +---+---+---+---+---+
 
 * **NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);**
 
