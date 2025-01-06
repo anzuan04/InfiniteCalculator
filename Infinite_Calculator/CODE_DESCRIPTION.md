@@ -112,7 +112,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > But if fc1->next == NULL or fc2->next == NULL, the number indicated by the pointer is not added
 
-        2. *move fc1 and fc2 to next then repeat 1.*
+        2. *move fc1 and fc2 to next then repeat a.*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -134,7 +134,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > But if fc1->next==NULL|fc2->next==NULL, the pointer does not move
         
-        3. *again 1.~2.*
+        3. *again a.~b.*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -226,7 +226,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             
             > int carry = (ic1 + ic2 + carry)/10
 
-        2. *move ic1 and ic2 to prev then repeat 1.*
+        2. *move ic1 and ic2 to prev then repeat a.*
 
                  ic1         fc1            **NN pointer**
                   |           |
@@ -298,7 +298,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             
             > But if fc1->next == NULL or fc2->next == NULL, the number indicated by the pointer is not calculated
 
-        2. *move fc1 and fc2 to next then repeat 1.*
+        2. *move fc1 and fc2 to next then repeat a.*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -320,7 +320,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > But if fc1->next==NULL|fc2->next==NULL, the pointer does not move
         
-        3. *again 1.~2.*
+        3. *again a.~b.*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -412,7 +412,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             
             > int borrow = !((10 + ic1 - ic2 - borrow) % 10)
 
-        2. *move ic1 and ic2 to prev then repeat 1.*
+        2. *move ic1 and ic2 to prev then repeat a.*
 
                  ic1         fc1            **NN pointer**
                   |           |
@@ -482,7 +482,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
         > ex : 35.12 * 37.995
 
-    2. **Multiplication Process**
+    2. ***Multiplication Process***
 
     * ***int Multiplication process***
 
@@ -520,7 +520,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 10*val1 | 20*val1 | 40*val1 | 80*val1 |   **NLN sumOverDot[4]**
                 +---------+---------+---------+---------+
         
-        4. *move now to prev and repeat 2.*
+        4. *move now to prev and repeat b.*
 
                  now                       **NN pointer**
                   |
@@ -577,7 +577,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 0.01*val1 | 0.02*val1 | 0.04*val1 | 0.08*val1 |   **NLN sumUnderDot[4]**
                 +-----------+-----------+-----------+-----------+
         
-        4. *move now to prev and repeat 2.*
+        4. *move now to prev and repeat b.*
 
                                  now            **NN pointer**
                                   |
@@ -599,7 +599,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > 9\*val1 = val1 + 8\*val1
 
-        5. *repeat 2.~4.*
+        5. *repeat b.~d.*
 
                                      now         **NN pointer**
                                       |
