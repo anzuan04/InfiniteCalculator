@@ -86,7 +86,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
         > ex : 35.12 + 38.995
 
-    2. **Addition Process for Simple Sum**
+    2. **Addition Process**
 
     * ***float Addition process***
 
@@ -154,7 +154,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 10 | 11 | 5 |             **NLN ret**
                 +----+----+---+
 
-        4. process the carry in ret
+        4. *process the carry in ret*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -178,7 +178,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > Iterate each ret->number, and handle the carry if the result is greater than or equal to 10.
         
-        5. add DOT to ret
+        5. *add DOT to ret*
 
                      ic1         fc1        **NN pointer**
                       |           |
@@ -270,9 +270,9 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             int carry = 0
 
-        > ex : 39.12 + 38.995
+        > ex : 39.12 - 38.995
 
-    2. **Subtraction Process for Simple Sum**
+    2. **Subtraction Process**
 
     * ***float subtraction process***
 
@@ -381,7 +381,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 +---+---+---+---+---+---+
 
                 +---+---+---+---+
-                | . | 1 | 1 | 5 |           **NLN ret**
+                | . | 1 | 2 | 5 |           **NLN ret**
                 +---+---+---+---+
 
                 int borrow = 1
@@ -405,7 +405,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                 +---+---+---+---+---+---+
 
                 +---+---+---+---+---+
-                | 0 | . | 1 | 1 | 5 |       **NLN ret**
+                | 0 | . | 1 | 2 | 5 |       **NLN ret**
                 +---+---+---+---+---+
 
                 int borrow = 0
@@ -429,8 +429,10 @@ The summarized description about InfiniteNumberNode.c and main.c
                 +---+---+---+---+---+---+
 
                 +---+---+---+---+---+---+
-                | 0 | 0 | . | 1 | 1 | 5 |   **NLN ret**
+                | 0 | 0 | . | 1 | 2 | 5 |   **NLN ret**
                 +---+---+---+---+---+---+
+
+                int borrow = 0
         
         3. *delete unnecessary zero*
         
@@ -449,10 +451,175 @@ The summarized description about InfiniteNumberNode.c and main.c
                 +---+---+---+---+---+---+
 
                 +---+---+---+---+---+
-                | 0 | . | 1 | 1 | 5 |       **NLN ret**
+                | 0 | . | 1 | 2 | 5 |       **NLN ret**
                 +---+---+---+---+---+
 
 * **NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);**
+
+    1. **Definition To Setup**
+            
+            +---+---+---+---+---+
+            | 3 | 5 | . | 1 | 2 |       **NLN val1**
+            +---+---+---+---+---+
+
+            +---+---+---+---+---+---+
+            | 3 | 7 | . | 9 | 9 | 5 |   **NLN val2**
+            +---+---+---+---+---+---+
+
+            +------+---+---+---+
+            | val1 |   |   |   |        **NLN sumOverDot[4]**
+            +------+---+---+---+
+
+            +------+---+---+---+
+            | val1 |   |   |   |        ** NLN sumUnderDot[4]**
+            +------+---+---+---+
+
+            +---+---+
+            | 0 | . |                   **NLN ret**
+            +---+---+
+
+            ret->value->sig = val1->value->sig * val2->value->sig;
+
+        > ex : 35.12 * 37.995
+
+    2. **Multiplication Process**
+
+    * ***int Multiplication process***
+
+        1. *make list for transforming mul to add*
+
+                +------+--------+--------+--------+
+                | val1 | 2*val1 | 4*val1 | 8*val1 |   **NLN sumOverDot[4]**
+                +------+--------+--------+--------+
+      
+        2. *add sumOverDot to ret repeatedly until ret equals the same value as the product*
+
+                     now                     **NN pointer**
+                      |
+                      v
+                +---+---+---+---+---+---+
+                | 3 | 7 | . | 9 | 9 | 5 |    **NLN val2**
+                +---+---+---+---+---+---+
+  
+                +---+---+   +------+   +--------+   +--------+
+                | 0 | . | + | val1 | + | 2*val1 | + | 4*val1 |   **NLN ret**
+                +---+---+   +------+   +--------+   +--------+
+
+                                     |
+                                     v
+
+                                 +--------+
+                                 | 7*val1 |  **NLN ret**
+                                 +--------+
+
+            > 7\*val1 = val1 + 2\*val1 + 4\*val1
+
+        3. *product by 10 to sumOverDot*
+
+                +---------+---------+---------+---------+
+                | 10*val1 | 20*val1 | 40*val1 | 80*val1 |   **NLN sumOverDot[4]**
+                +---------+---------+---------+---------+
+        
+        4. *move now to prev and repeat 2.*
+
+                 now                       **NN pointer**
+                  |
+                  v
+                +---+---+---+---+---+---+
+                | 3 | 7 | . | 9 | 9 | 5 |  **NLN val2**
+                +---+---+---+---+---+---+
+  
+                +--------+   +---------+   +---------+
+                | 7*val1 | + | 10*val1 | + | 20*val1 |   **NLN ret**
+                +--------+   +---------+   +---------+
+
+                                 |
+                                 v
+                            +---------+
+                            | 37*val1 |    **NLN ret**
+                            +---------+
+
+            > 3\*val1 = val1 + 2\*val1
+    
+    * ***float Multiplication process***
+
+        1. *make list for transforming mul to add*
+
+                +----------+----------+----------+----------+
+                | 0.1*val1 | 0.2*val1 | 0.4*val1 | 0.8*val1 |   **NLN sumUnderDot[4]**
+                +----------+----------+----------+----------+
+      
+        2. *add sumUnderDot to ret repeatedly until ret equals the same value as the product*
+
+                             now             **NN pointer**
+                              |
+                              v
+                +---+---+---+---+---+---+
+                | 3 | 7 | . | 9 | 9 | 5 |    **NLN val2**
+                +---+---+---+---+---+---+
+  
+                +---------+   +----------+   +----------+
+                | 37*val1 | + | 0.1*val1 | + | 0.8*val1 |  **NLN ret**
+                +---------+   +----------+   +----------+
+
+                                     |
+                                     v
+
+                               +-----------+
+                               | 37.9*val1 |  **NLN ret**
+                               +-----------+
+
+            > 9\*val1 = val1 + 8\*val1
+
+        3. *divide by 10 to sumUnderDot*
+
+                +-----------+-----------+-----------+-----------+
+                | 0.01*val1 | 0.02*val1 | 0.04*val1 | 0.08*val1 |   **NLN sumUnderDot[4]**
+                +-----------+-----------+-----------+-----------+
+        
+        4. *move now to prev and repeat 2.*
+
+                                 now            **NN pointer**
+                                  |
+                                  v
+                +---+---+---+---+---+---+
+                | 3 | 7 | . | 9 | 9 | 5 |       **NLN val2**
+                +---+---+---+---+---+---+
+  
+                +-----------+   +-----------+   +-----------+
+                | 37.9*val1 | + | 0.01*val1 | + | 0.08*val1 |  **NLN ret**
+                +-----------+   +-----------+   +-----------+
+
+                                       |
+                                       v
+  
+                                +------------+
+                                | 37.99*val1 |  **NLN ret**
+                                +------------+
+
+            > 9\*val1 = val1 + 8\*val1
+
+        5. *repeat 2.~4.*
+
+                                     now         **NN pointer**
+                                      |
+                                      v
+                +---+---+---+---+---+---+
+                | 3 | 7 | . | 9 | 9 | 5 |        **NLN val2**
+                +---+---+---+---+---+---+
+  
+                +------------+   +------------+   +------------+
+                | 37.99*val1 | + | 0.001*val1 | + | 0.004*val1 |  **NLN ret**
+                +------------+   +------------+   +------------+
+
+                                       |
+                                       v
+  
+                                +-------------+
+                                | 37.995*val1 |  **NLN ret**
+                                +-------------+
+
+            > 5\*val1 = val1 + 4\*val1
 
 * **NumberListNode* divide(NumberListNode* val1, NumberListNode* val2);**
 
