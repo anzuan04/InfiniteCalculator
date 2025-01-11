@@ -49,7 +49,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 > ex : 35.12 + 38.995 in queue by conversing infix to postfix
 
-* **typedef struct __calStack**  
+* **typedef struct __calStack**
 
 | member(struct) | val |
 | :-: | :-: |
@@ -245,6 +245,12 @@ The summarized description about InfiniteNumberNode.c and main.c
                 +---+---+---+---+---+---+
                 | 7 | 4 | . | 1 | 1 | 5 |   **NLN ret**
                 +---+---+---+---+---+---+
+
+    3. **Return ret**
+
+            +---+---+---+---+---+---+
+            | 7 | 4 | . | 1 | 1 | 5 |   **NLN ret**
+            +---+---+---+---+---+---+
 
 * **NumberListNode\* subtract(NumberListNode\* val1, NumberListNode\* val2);**
     
@@ -454,6 +460,12 @@ The summarized description about InfiniteNumberNode.c and main.c
                 | 0 | . | 1 | 2 | 5 |       **NLN ret**
                 +---+---+---+---+---+
 
+    3. **Return ret**
+
+            +---+---+---+---+---+
+            | 0 | . | 1 | 2 | 5 |       **NLN ret**
+            +---+---+---+---+---+
+
 * **NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);**
 
     1. **Definition To Setup**
@@ -482,7 +494,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
         > ex : 35.12 * 37.995
 
-    2. ***Multiplication Process***
+    2. **Multiplication Process**
 
     * ***int Multiplication process***
 
@@ -514,7 +526,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
             > 7\*val1 = val1 + 2\*val1 + 4\*val1
 
-        3. *product by 10 to sumOverDot*
+        3. *multiply sumOverDot by 10*
 
                 +---------+---------+---------+---------+
                 | 10*val1 | 20*val1 | 40*val1 | 80*val1 |   **NLN sumOverDot[4]**
@@ -620,9 +632,101 @@ The summarized description about InfiniteNumberNode.c and main.c
                                 +-------------+
 
             > 5\*val1 = val1 + 4\*val1
+    
+    3. **Return ret**
+
+            +-------------+
+            | 37.995*val1 |  **NLN ret**
+            +-------------+
 
 * **NumberListNode* divide(NumberListNode* val1, NumberListNode* val2);**
 
+    1. **Definition To Setup**
+                
+                 left       **NLN left**
+                  |
+                  v
+            +---+---+---+
+            | 9 | 0 | . |   **NLN val1**
+            +---+---+---+
+
+            +---+---+---+
+            | 1 | 5 | . |   **NLN val2**
+            +---+---+---+
+
+                right       **NLN right**
+                  |
+                  v
+            +---+---+---+
+            | 0 | . | 1 | ^ 200  **NLN smallVal**
+            +---+---+---+
+
+            ret->value->sig = val1->value->sig * val2->value->sig;
+
+            int cnt = 0
+
+        > ex : 9 / 1.5
+        > multiply 9 and 1.5 by 10 in order to remove the decimal part
+
+    2. **Divide And Conquer**
+
+    * ***divide process***
+    
+                 left       **NLN left**
+                  |
+                  v
+            +---+---+---+
+            | 9 | 0 | . |   **NLN val1**
+            +---+---+---+
+
+                  +
+
+                right       **NLN right**
+                  |
+                  v
+            +---+---+---+
+            | 0 | . | 1 | ^ 200  **NLN smallVal**
+            +---+---+---+
+                  
+                  =
+
+               +-----+
+               | ret | / 2  **NLN mid**
+               +-----+
+
+        > mid = (left+right)/2
+        > 0.1^200…mid…90
+    
+    * ***Conquer process***
+            
+            +---------------------------------------------------+
+            | compareAbsoluteValue(multiply(M, VAL2), val1) > 0 |
+            +---------------------------------------------------+
+                                      |
+                           +----------+----------+
+                          Yes                   No
+                           |                     |
+                    +-------------+       +------------+
+                    | right = mid |       | left = mid |
+                    +-------------+       +------------+
+            
+            int cnt++
+        
+        > if mid\*15 is greater than 90, right is mid. so next mid is smaller than now mid
+        > else, left is mid. so next mid is greater than now mid
+    
+    3. **Repeat b. until cnt >= 10000 or left+smallVal >= right**
+
+            +---------------------+
+            | 6.44342576…*0.1^200 |  **NLN right**
+            +---------------------+
+    
+    4. **Return right**
+
+            +---------------------+
+            | 6.44342576…*0.1^200 |  **NLN right**
+            +---------------------+
+    
 ### DataStructure Method
 
 void NumberList_push_back(NumberList* nl, int val, NumberNode* now);
