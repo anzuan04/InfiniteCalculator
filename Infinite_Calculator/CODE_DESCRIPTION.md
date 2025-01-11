@@ -671,53 +671,53 @@ The summarized description about InfiniteNumberNode.c and main.c
 
     2. **Divide And Conquer**
 
-    * ***divide process***
-    
-                 left       **NLN left**
-                  |
-                  v
-            +---+---+---+
-            | 9 | 0 | . |   **NLN val1**
-            +---+---+---+
-
-                  +
-
-                right       **NLN right**
-                  |
-                  v
-            +---+---+---+
-            | 0 | . | 1 | ^ 200  **NLN smallVal**
-            +---+---+---+
-                  
-                  =
-
-               +-----+
-               | ret | / 2  **NLN mid**
-               +-----+
-
-        > mid = (left+right)/2
-
-        > 0.1^200…mid…90
-    
-    * ***Conquer process***
-            
-            +---------------------------------------------------+
-            | compareAbsoluteValue(multiply(M, VAL2), val1) > 0 |
-            +---------------------------------------------------+
-                                      |
-                           +----------+----------+
-                          Yes                   No
-                           |                     |
-                    +-------------+       +------------+
-                    | right = mid |       | left = mid |
-                    +-------------+       +------------+
-            
-            int cnt++
+        * ***divide process***
         
-        > if mid\*15 is greater than 90, right is mid. so next mid is smaller than now mid
-
-        > else, left is mid. so next mid is greater than now mid
+                     left       **NLN left**
+                      |
+                      v
+                +---+---+---+
+                | 9 | 0 | . |   **NLN val1**
+                +---+---+---+
     
+                      +
+    
+                    right       **NLN right**
+                      |
+                      v
+                +---+---+---+
+                | 0 | . | 1 | ^ 200  **NLN smallVal**
+                +---+---+---+
+                      
+                      =
+    
+                   +-----+
+                   | ret | / 2  **NLN mid**
+                   +-----+
+    
+            > mid = (left+right)/2
+    
+            > 0.1^200…mid…90
+        
+        * ***Conquer process***
+                
+                +---------------------------------------------------+
+                | compareAbsoluteValue(multiply(M, VAL2), val1) > 0 |
+                +---------------------------------------------------+
+                                          |
+                               +----------+----------+
+                              Yes                   No
+                               |                     |
+                        +-------------+       +------------+
+                        | right = mid |       | left = mid |
+                        +-------------+       +------------+
+                
+                int cnt++
+            
+            > if mid\*15 is greater than 90, right is mid. so next mid is smaller than now mid
+    
+            > else, left is mid. so next mid is greater than now mid
+        
     3. **Repeat ii. until (cnt >= 10000 or left+smallVal >= right)**
 
             +---------------------+
