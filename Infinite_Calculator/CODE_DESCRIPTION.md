@@ -466,7 +466,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             | 0 | . | 1 | 2 | 5 |       **NLN ret**
             +---+---+---+---+---+
 
-* **NumberListNode* multiply(NumberListNode* val1, NumberListNode* val2);**
+* **NumberListNode\* multiply(NumberListNode\* val1, NumberListNode\* val2);**
 
     1. **Definition To Setup**
             
@@ -639,7 +639,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             | 37.995*val1 |  **NLN ret**
             +-------------+
 
-* **NumberListNode* divide(NumberListNode* val1, NumberListNode* val2);**
+* **NumberListNode\* divide(NumberListNode\* val1, NumberListNode\* val2);**
 
     1. **Definition To Setup**
                 
@@ -666,6 +666,7 @@ The summarized description about InfiniteNumberNode.c and main.c
             int cnt = 0
 
         > ex : 9 / 1.5
+
         > multiply 9 and 1.5 by 10 in order to remove the decimal part
 
     2. **Divide And Conquer**
@@ -695,6 +696,7 @@ The summarized description about InfiniteNumberNode.c and main.c
                +-----+
 
         > mid = (left+right)/2
+
         > 0.1^200…mid…90
     
     * ***Conquer process***
@@ -713,9 +715,10 @@ The summarized description about InfiniteNumberNode.c and main.c
             int cnt++
         
         > if mid\*15 is greater than 90, right is mid. so next mid is smaller than now mid
+
         > else, left is mid. so next mid is greater than now mid
     
-    3. **Repeat b. until cnt >= 10000 or left+smallVal >= right**
+    3. **Repeat ii. until (cnt >= 10000 or left+smallVal >= right)**
 
             +---------------------+
             | 6.44342576…*0.1^200 |  **NLN right**
