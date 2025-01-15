@@ -672,35 +672,35 @@ The summarized description about InfiniteNumberNode.c and main.c
     2. **Divide And Conquer**
 
         * ***divide process***
-        
+
                      left       **NLN left**
                       |
                       v
                 +---+---+---+
                 | 9 | 0 | . |   **NLN val1**
                 +---+---+---+
-    
+
                       +
-    
+
                     right       **NLN right**
                       |
                       v
                 +---+---+---+
                 | 0 | . | 1 | ^ 200  **NLN smallVal**
                 +---+---+---+
-                      
+
                       =
-    
+
                    +-----+
                    | ret | / 2  **NLN mid**
                    +-----+
-    
+
             > mid = (left+right)/2
-    
+
             > 0.1^200…mid…90
-        
+
         * ***Conquer process***
-                
+
                 +---------------------------------------------------+
                 | compareAbsoluteValue(multiply(M, VAL2), val1) > 0 |
                 +---------------------------------------------------+
@@ -711,13 +711,13 @@ The summarized description about InfiniteNumberNode.c and main.c
                         +-------------+       +------------+
                         | right = mid |       | left = mid |
                         +-------------+       +------------+
-                
+
                 int cnt++
-            
+
             > if mid\*15 is greater than 90, right is mid. so next mid is smaller than now mid
-    
+
             > else, left is mid. so next mid is greater than now mid
-        
+
     3. **Repeat ii. until (cnt >= 10000 or left+smallVal >= right)**
 
             +---------------------+
@@ -729,29 +729,178 @@ The summarized description about InfiniteNumberNode.c and main.c
             +---------------------+
             | 6.44342576…*0.1^200 |  **NLN right**
             +---------------------+
-    
+
+---
+
 ### DataStructure Method
 
-void NumberList_push_back(NumberList* nl, int val, NumberNode* now);
-void NumberList_push_front(NumberList* nl, int val, NumberNode* now);
-void queue_push(queue* Q, NumberListNode* nowNode);
-NumberListNode* queue_pop(queue* Q);
-void stack_push(stack* S, NumberListNode* now);
-NumberListNode* stack_pop(stack* S);
-void stack_push_op(stack* S, queue* Q, int opInput);
+#### NumberList
+
+* **void NumberList_push_back(NumberList\* nl, int val, NumberNode\* now);**
+
+    1. **Store val to now**
+
+            +---+
+            | 8 |   **NN head**
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |   **NN tail**
+            +---+
+
+            +---+
+            | 9 |   **NN now**
+            +---+
+        
+        > ex : push back 9 to 87
+              
+    2. **Set prev And next**
+
+            +---+
+            | 8 |   **NN head**
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |   **NN tail**
+            +---+
+
+              ^     **NN prev**
+              |
+              v     **NN next**
+
+            +---+
+            | 9 |   **NN now**
+            +---+
+    
+    3. **Set tail**
+        
+            +---+
+            | 8 |   **NN head**
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |
+            +---+
+
+              ^     **NN prev**
+              |
+              v     **NN next**
+
+            +---+
+            | 9 |   **NN tail**
+            +---+
+    
+* **void NumberList_push_front(NumberList\* nl, int val, NumberNode\* now);**
+
+    1. **Store val to now**
+
+            +---+
+            | 9 |   **NN now**
+            +---+
+
+            +---+
+            | 8 |   **NN head**
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |   **NN tail**
+            +---+
+        
+        > ex : push front 9 to 87
+              
+    2. **Set prev And next**
+
+            +---+
+            | 9 |   **NN now**
+            +---+
+
+              ^     **NN prev**
+              |
+              v     **NN next**
+
+            +---+
+            | 8 |   **NN head**
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |   **NN tail**
+            +---+
+    
+    3. **Set head**
+        
+            +---+
+            | 9 |   **NN head**
+            +---+
+
+              ^     **NN prev**
+              |
+              v     **NN next**
+
+            +---+
+            | 8 |
+            +---+
+              
+              ^     **NN prev**
+              |
+              v     **NN next**
+            
+            +---+
+            | 7 |   **NN tail**
+            +---+
+
+#### Queue
+
+* **void queue_push(queue\* Q, NumberListNode\* nowNode);**
+
+* **NumberListNode\* queue_pop(queue\* Q);**
+
+#### Stack
+
+* **void stack_push(stack\* S, NumberListNode\* now);**
+
+* **NumberListNode\* stack_pop(stack\* S);**
+
+* **void stack_push_op(stack\* S, queue\* Q, int opInput);**
+
+---
 
 ### OperationUnit Method
 
-int compareAbsoluteValue(NumberListNode* val1, NumberListNode* val2);
-NumberListNode* divide_by_2(NumberListNode* val);
-void divide_by_10(NumberListNode* val);
-void product_by_10(NumberListNode* val);
-void NumberList_push_dot(NumberList* nl);
-void delete_zero(NumberListNode* val);
+* **int compareAbsoluteValue(NumberListNode\* val1, NumberListNode\* val2);**
 
-## Main.c
+* **NumberListNode\* divide_by_2(NumberListNode\* val);**
+
+* **void divide_by_10(NumberListNode\* val);**
+
+* **void product_by_10(NumberListNode\* val);**
+
+* **void NumberList_push_dot(NumberList\* nl);**
+
+* **void delete_zero(NumberListNode\* val);**
 
 ---
+
+## Main.c
 
 ### 중위표기식->후위표기식 전환 과정
 
