@@ -738,7 +738,7 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 * **void NumberList_push_back(NumberList\* nl, int val, NumberNode\* now);**
 
-    1. **Store val to now**
+    1. **Store val To now**
 
             +---+
             | 8 |   **NN head**
@@ -757,6 +757,8 @@ The summarized description about InfiniteNumberNode.c and main.c
             +---+
         
         > ex : push back 9 to 87
+
+        > if NumberList is NULL, head and tail is now
               
     2. **Set prev And next**
 
@@ -804,7 +806,7 @@ The summarized description about InfiniteNumberNode.c and main.c
     
 * **void NumberList_push_front(NumberList\* nl, int val, NumberNode\* now);**
 
-    1. **Store val to now**
+    1. **Store val To now**
 
             +---+
             | 9 |   **NN now**
@@ -823,6 +825,8 @@ The summarized description about InfiniteNumberNode.c and main.c
             +---+
         
         > ex : push front 9 to 87
+
+        > if NumberList is NULL, head and tail is now        
               
     2. **Set prev And next**
 
@@ -872,13 +876,241 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 * **void queue_push(queue\* Q, NumberListNode\* nowNode);**
 
+    1. **Set prev And next Between tail and nowNode**
+
+            +-----+
+            | 829 |  **NLN head**
+            +-----+
+              
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+            
+            +-----+
+            | 795 |  **NLN tail**
+            +-----+
+
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+
+             +---+
+             | + |   **NLN nowNode**
+             +---+
+
+        > ex : push + to queue
+
+        > if queue is NULL, qhead and qtail is nowNode  
+    
+    2. **Set tail**
+        
+            +-----+
+            | 829 |  **NLN head**
+            +-----+
+              
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+            
+            +-----+
+            | 795 |  
+            +-----+
+
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+
+             +---+
+             | + |   **NLN tail**
+             +---+
+
 * **NumberListNode\* queue_pop(queue\* Q);**
+
+    1. **Set ret To Point head**
+
+            +-----+
+            | 829 |  **NLN head** <- NLN* ret
+            +-----+
+              
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+            
+            +-----+
+            | 795 |  
+            +-----+
+
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+
+             +---+
+             | + |   **NLN tail**
+             +---+
+
+    2. **Set head To next**
+
+            +-----+
+            | 829 |  <- NLN* ret
+            +-----+
+              
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+            
+            +-----+
+            | 795 |  **NLN head**
+            +-----+
+
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+
+             +---+
+             | + |   **NLN tail**
+             +---+
+
+    3. **Remove prev And next Between ret And head**
+
+            +-----+
+            | 829 |  <- NLN* ret
+            +-----+
+              
+            +-----+
+            | 795 |  **NLN head**
+            +-----+
+
+               ^     **NLN prev**
+               |
+               v     **NLN next**
+
+             +---+
+             | + |   **NLN tail**
+             +---+
+    
+    4. **Return ret**
+
+            +-----+
+            | 829 |  <- NLN* ret
+            +-----+
 
 #### Stack
 
 * **void stack_push(stack\* S, NumberListNode\* now);**
 
+    1. **Set prev And next Between sTop and nowNode**
+            
+             +---+
+             | + |   
+             +---+
+                            
+               ^
+               |
+               v
+             
+             +---+
+             | * |   **NLN sTop**
+             +---+
+               
+               ^
+               |
+               v
+             
+             +---+
+             | ( |   **NLN nowNode**
+             +---+
+
+    2. **Set sTop**
+            
+             +---+
+             | + |   
+             +---+
+                            
+               ^
+               |
+               v
+             
+             +---+
+             | * |   
+             +---+
+               
+               ^
+               |
+               v
+             
+             +---+
+             | ( |   **NLN sTop**
+             +---+
+
 * **NumberListNode\* stack_pop(stack\* S);**
+
+    1. **Set ret To Point sTop**
+            
+             +---+
+             | + |   
+             +---+
+                            
+               ^
+               |
+               v
+             
+             +---+
+             | * |   
+             +---+
+               
+               ^
+               |
+               v
+             
+             +---+
+             | ( |   **NLN sTop** <- NLN* ret
+             +---+
+
+    2. **Set sTop to prev**
+            
+             +---+
+             | + |   
+             +---+
+                            
+               ^
+               |
+               v
+             
+             +---+
+             | * |   **NLN sTop** 
+             +---+
+               
+               ^
+               |
+               v
+             
+             +---+
+             | ( |   <- NLN* ret
+             +---+
+
+    3. **Remove prev And next Between sTop and ret**
+            
+             +---+
+             | + |   
+             +---+
+                            
+               ^
+               |
+               v
+             
+             +---+
+             | * |   **NLN sTop** 
+             +---+
+               
+             +---+
+             | ( |   <- NLN* ret
+             +---+
+
+    3. **Return ret**
+
+             +---+
+             | ( |   <- NLN* ret
+             +---+
 
 * **void stack_push_op(stack\* S, queue\* Q, int opInput);**
 
