@@ -1130,9 +1130,9 @@ The summarized description about InfiniteNumberNode.c and main.c
             | / |   **int opInput**    | 34 |
             +---+                      +----+
               
-              |
-              |                        
-              v
+                            |                        
+                            |
+                            v
 
             STACK                      QUEUE
 
