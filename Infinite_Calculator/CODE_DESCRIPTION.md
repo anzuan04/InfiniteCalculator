@@ -1000,119 +1000,171 @@ The summarized description about InfiniteNumberNode.c and main.c
 
     1. **Set prev And next Between sTop and nowNode**
             
-             +---+
-             | + |   
-             +---+
-                            
-               ^
-               |
-               v
-             
-             +---+
-             | * |   **NLN sTop**
-             +---+
-               
-               ^
-               |
-               v
-             
-             +---+
-             | ( |   **NLN nowNode**
-             +---+
+            +---+
+            | + |   
+            +---+
+                           
+              ^
+              |
+              v
+            
+            +---+
+            | * |   **NLN sTop**
+            +---+
+              
+              ^
+              |
+              v
+            
+            +---+
+            | ( |   **NLN nowNode**
+            +---+
 
     2. **Set sTop**
             
-             +---+
-             | + |   
-             +---+
-                            
-               ^
-               |
-               v
-             
-             +---+
-             | * |   
-             +---+
-               
-               ^
-               |
-               v
-             
-             +---+
-             | ( |   **NLN sTop**
-             +---+
+            +---+
+            | + |   
+            +---+
+                           
+              ^
+              |
+              v
+            
+            +---+
+            | * |   
+            +---+
+              
+              ^
+              |
+              v
+            
+            +---+
+            | ( |   **NLN sTop**
+            +---+
 
 * **NumberListNode\* stack_pop(stack\* S);**
 
     1. **Set ret To Point sTop**
             
-             +---+
-             | + |   
-             +---+
-                            
-               ^
-               |
-               v
-             
-             +---+
-             | * |   
-             +---+
-               
-               ^
-               |
-               v
-             
-             +---+
-             | ( |   **NLN sTop** <- NLN* ret
-             +---+
+            +---+
+            | + |   
+            +---+
+                           
+              ^
+              |
+              v
+            
+            +---+
+            | * |   
+            +---+
+              
+              ^
+              |
+              v
+            
+            +---+
+            | ( |   **NLN sTop** <- NLN* ret
+            +---+
 
     2. **Set sTop to prev**
             
-             +---+
-             | + |   
-             +---+
-                            
-               ^
-               |
-               v
-             
-             +---+
-             | * |   **NLN sTop** 
-             +---+
-               
-               ^
-               |
-               v
-             
-             +---+
-             | ( |   <- NLN* ret
-             +---+
+            +---+
+            | + |   
+            +---+
+                           
+              ^
+              |
+              v
+            
+            +---+
+            | * |   **NLN sTop** 
+            +---+
+              
+              ^
+              |
+              v
+            
+            +---+
+            | ( |   <- NLN* ret
+            +---+
 
     3. **Remove prev And next Between sTop and ret**
             
-             +---+
-             | + |   
-             +---+
-                            
-               ^
-               |
-               v
-             
-             +---+
-             | * |   **NLN sTop** 
-             +---+
-               
-             +---+
-             | ( |   <- NLN* ret
-             +---+
+            +---+
+            | + |   
+            +---+
+                           
+              ^
+              |
+              v
+            
+            +---+
+            | * |   **NLN sTop** 
+            +---+
+              
+            +---+
+            | ( |   <- NLN* ret
+            +---+
 
     3. **Return ret**
 
-             +---+
-             | ( |   <- NLN* ret
-             +---+
-
+            +---+
+            | ( |   <- NLN* ret
+            +---+
+            
 * **void stack_push_op(stack\* S, queue\* Q, int opInput);**
+
+    1. **stack pop then push queue until sTop is open bracket or operator priority of opInput is greater than sTop**
+            
+            STACK                      QUEUE
+
+            +---+                      +----+
+            | + |                      | 12 |
+            +---+                      +----+
+              |                          |
+            +---+                      +----+
+            | * |   **NLN sTop**       | 22 |
+            +---+                      +----+
+                                         |
+            +---+                      +----+
+            | / |   **int opInput**    | 34 |
+            +---+                      +----+
+              
+              |
+              |                        
+              v
+
+            STACK                      QUEUE
+
+            +---+                      +----+
+            | + |   **NLN sTop**       | 12 |
+            +---+                      +----+
+                                         |
+            +---+                      +----+
+            | / |   **int opInput**    | 22 |
+            +---+                      +----+
+                                         |
+                                       +----+
+                                       | 34 |
+                                       +----+
+                                         |
+                                       +---+
+                                       | * |
+                                       +---+
+                                       
+        > ex : 12+22*34/22
+
+    2. **stack push opInput**
+
+            STACK      
+
+            +---+                      
+            | + |   **NLN sTop**       
+            +---+
+              |
+            +---+                      
+            | / |   **int opInput**    
+            +---+  
 
 ---
 
