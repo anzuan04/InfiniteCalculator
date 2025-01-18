@@ -1168,22 +1168,6 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 ---
 
-### OperationUnit Method
-
-* **int compareAbsoluteValue(NumberListNode\* val1, NumberListNode\* val2);**
-
-* **NumberListNode\* divide_by_2(NumberListNode\* val);**
-
-* **void divide_by_10(NumberListNode\* val);**
-
-* **void product_by_10(NumberListNode\* val);**
-
-* **void NumberList_push_dot(NumberList\* nl);**
-
-* **void delete_zero(NumberListNode\* val);**
-
----
-
 ## Main.c
 
 ### 중위표기식->후위표기식 전환 과정
