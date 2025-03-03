@@ -1,6 +1,6 @@
 # CODE_DESCRIPTION
 
-The summarized description about InfiniteNumberNode.c and main.c
+The summarized description about InfiniteNumberNode.c
 
 ## InfiniteNumberNode.c
 
@@ -1168,24 +1168,5 @@ The summarized description about InfiniteNumberNode.c and main.c
 
 ---
 
-## Main.c
 
-### 중위표기식->후위표기식 전환 과정
-
-    if(ch == ' ' || ch == '\t' || ch == '\n')
-    if (ch >= '0' && ch <= '9')
-    else if (ch == '.')
-    else if (ch == '*' || ch == '/' || ch == '+' || ch == '-')
-    else if (ch == '(')
-    else if (ch == ')')
-
-### 후위표기식 계산 과정
-
-    if (now->value->op == 0)
-
-    else
-        case ADD:
-        case SUB:
-        case MUL:
-        case DIV:
     
