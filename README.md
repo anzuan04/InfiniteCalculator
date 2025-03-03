@@ -12,4 +12,4 @@
 
 ## ✒️ 참고 링크
 
--전위표기식 후위표기식 변환 : <https://todaycode.tistory.com/73>
+- 전위표기식 후위표기식 변환 : <https://todaycode.tistory.com/73>
