@@ -18,7 +18,6 @@ The summarized description about InfiniteNumberNode.c
 
 프로그램은 **입력(Input) → 파싱(Parsing) → 연산(Calculation) → 출력(Output)**의 파이프라인으로 동작합니다.
 
-```text
 [User Input Stream]   (e.g., "12.5 + 3")
        │
        ▼
