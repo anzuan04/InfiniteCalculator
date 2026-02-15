@@ -18,6 +18,7 @@ The summarized description about InfiniteNumberNode.c
 
 프로그램은 **입력(Input) → 파싱(Parsing) → 연산(Calculation) → 출력(Output)**의 파이프라인으로 동작합니다.
 
+```
 [User Input Stream]   (e.g., "12.5 + 3")
        │
        ▼
@@ -35,7 +36,7 @@ The summarized description about InfiniteNumberNode.c
        │ • "연산자" -> Stack Pop 2회 -> 연산 수행(Add/Mul...) -> Result Push
        ▼
 [Output Result]
-
+```
 ---
 
 ## InfiniteNumberNode.c
