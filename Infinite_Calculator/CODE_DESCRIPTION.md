@@ -2,9 +2,58 @@
 
 The summarized description about InfiniteNumberNode.c
 
+---
+
+## Project Structure
+
+| 파일명 | 역할 | 상세 설명 |
+| :--- | :--- | :--- |
+| **`infiniteNumberNode.h`** | 구조체(`struct`), 상수(`define`), 함수 프로토타입 정의 |
+| **`infiniteNumberNode.c`** | 메모리 관리, 자료구조 조작, 사칙연산(`+`, `-`, `*`, `/`) 알고리즘 구현 |
+| **`main.c`** |  사용자 입력 파싱, 중위→후위 표기식 변환, 연산 스케줄링 및 결과 출력 |
+
+---
+
+## System Architecture
+
+프로그램은 **입력(Input) → 파싱(Parsing) → 연산(Calculation) → 출력(Output)**의 파이프라인으로 동작합니다.
+
+```text
+[User Input Stream]   (e.g., "12.5 + 3")
+       │
+       ▼
+[1. Parsing Engine] (in main.c)
+       │ • 공백 제거 및 유효성 검사 (Leading Zero 등)
+       │ • Shunting-yard 알고리즘: 중위 표기법 -> 후위 표기법 변환
+       │ • Stack(연산자)과 Queue(피연산자) 활용
+       ▼
+[2. Execution Queue] (Postfix)
+       │ (State: ["12.5", "3", "+"])
+       ▼
+[3. Calculation Core] (in infiniteNumberNode.c)
+       │ • Queue에서 토큰 추출
+       │ • "피연산자" -> Stack Push
+       │ • "연산자" -> Stack Pop 2회 -> 연산 수행(Add/Mul...) -> Result Push
+       ▼
+[Output Result]
+
+---
+
 ## InfiniteNumberNode.c
 
 ### DataStructure
+
+(Prev/MSB) <------------------------------------> (Next/LSB)
+
+    [Head]                                            [Tail]
+      │                                                 │
+      ▼                                                 ▼
+    ┌───┐    ┌───┐    ┌───────┐    ┌───┐    ┌───┐
+    │ 3 │◀──▶│ 5 │◀──▶│ DOT(.)│◀──▶│ 1 │◀──▶│ 2 │
+    └───┘    └───┘    └───────┘    └───┘    └───┘
+                          ▲
+                          │
+                 [Dot Pointer] (기준점)
 
 * **typedef struct __NumberNode**
 
